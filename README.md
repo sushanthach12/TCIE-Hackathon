@@ -1,70 +1,119 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To Run Locally
 
-## Available Scripts
+Clone the project
 
-In the project directory, you can run:
+```bash
+  git clone https://github.com/piyush-agrawal6/Hospital-Management-System.git
+```
 
-### `npm start`
+Go to the project directory
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+  cd Hospital-Management-System
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Install dependencies
 
-### `npm test`
+```bash
+  npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start the server
 
-### `npm run build`
+```bash
+  npm run start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Hospital Management System
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Hospital management system is a website which can control all the management related to a hospital, like admitting patients, booking beds, calling an ambulance, managing payments, creating reports of patients and many more thing online.
 
-### `npm run eject`
+![1](https://user-images.githubusercontent.com/100460788/215811132-40070d36-862a-4154-adc0-903c6fa65394.jpg)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Client:** 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React**
+- **Redux Thunk**
+- **Axios**
+- **Ant-Designs**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Server:**
 
-## Learn More
+- **Node Js**
+- **Mongo DB**
+- **Express Js**
+- **JWT**
+- **Nodemailer**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Client**  (Netlify)
+- **Server** - (Cyclic)
 
-### Code Splitting
+## Credentials
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ID - 100
 
-### Analyzing the Bundle Size
+Password - masai
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Features
 
-### Making a Progressive Web App
+- Admin controls
+- Admitting Patients
+- Booking beds and ambulance
+- Creating appointments
+- Generating reports 
+- Overall control of hospital
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔗 Links
 
-### Advanced Configuration
+Dashboard - https://hm-system.netlify.app/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+User Side - https://hms-user-side.netlify.app/
 
-### Deployment
+Server - https://github.com/piyush-agrawal6/HMS-Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Screenshots
 
-### `npm run build` fails to minify
+1.Dashboard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![31 01 2023_21 16 55_REC](https://user-images.githubusercontent.com/100460788/215808721-eb9f8778-53df-43fe-a1ab-662c0ff78c4f.png)
+
+2.Profile
+
+![31 01 2023_21 17 08_REC](https://user-images.githubusercontent.com/100460788/215808736-31e6dd9e-e5f3-4a48-9bbf-d505c27579c2.png)
+
+3.Beds
+
+![31 01 2023_21 17 21_REC](https://user-images.githubusercontent.com/100460788/215808740-af93a793-4a82-44c5-9eab-1bc11a6a6068.png)
+
+4.Book appointment
+
+![31 01 2023_21 17 43_REC](https://user-images.githubusercontent.com/100460788/215808744-417cbac9-eb6c-41d0-a4a9-414bb91cd03e.png)
+
+5.Add profile
+
+![31 01 2023_21 18 12_REC](https://user-images.githubusercontent.com/100460788/215808745-9813e61d-a13c-447f-b3c9-1f910ba8531f.png)
+
+6.Add ambulance
+
+![31 01 2023_21 18 30_REC](https://user-images.githubusercontent.com/100460788/215808748-9bb5d05d-afb1-41a3-9427-38089a28d0ed.png)
+
+7.Login Page
+
+![31 01 2023_21 15 44_REC](https://user-images.githubusercontent.com/100460788/215808752-4ebfb582-1db0-45e4-ac53-a87a5f1b75ea.png)
+
+## Presentation
+
+Link - <a href="https://drive.google.com/file/d/1xwcSsjdl6QHnJ-JXl11moBAwSqSQFRjh/view?usp=sharing" alt="presentation">Drive</a>
+
+## Team Members / Contributors
+
+- [@Piyush Agrawal](https://github.com/piyush-agrawal6)
+- [@Rajendra Patel](https://github.com/centauricoder01)
+- [@Salman Ajani](https://github.com/SalmanAjani)
+
