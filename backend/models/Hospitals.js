@@ -18,6 +18,7 @@ const HospitalSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    facilities: [hospitalFacilities],
     email: {
       type: String,
       required: true,
