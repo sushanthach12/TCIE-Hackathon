@@ -15,6 +15,10 @@ const bedSchema = mongoose.Schema(
         type: Number,
         required: true,
       },
+      roomtype: {
+        type: String,
+        required: true,
+      },
       occupied: {
         type: Boolean,
         required: true,
