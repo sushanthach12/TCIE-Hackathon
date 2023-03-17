@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const registerHospital = require('../controllers/hospitalController');
-
 // @route   POST api/hospital
 // @desc    Register a hospital
 router.post('/registerHos', async (req, res) => {
     registerHospital(req, res)
 })
 
+<<<<<<< HEAD
 // const addOrderItems = asyncHandler(async (req, res) => {
 //   const {
 //     orderItems,
@@ -49,3 +49,6 @@ router.post('/registerHos', async (req, res) => {
 
 
 module.exports = router
+=======
+module.exports = router;
+>>>>>>> 378af08cca06490070165a0074d3dfdba2f02c02
