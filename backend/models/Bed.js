@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const BedSchema = mongoose.Schema(
 	{
@@ -39,4 +39,4 @@ const BedSchema = mongoose.Schema(
 	}
 )
 
-export default mongoose.models?.Bed || mongoose.model("Bed", BedSchema)
+module.exports = mongoose.model('Beds', BedSchema)

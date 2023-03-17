@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/User')
+require('dotenv').config()
 const { body, validationResult } = require('express-validator')
 const router = express.Router();
 const CryptoJS = require('crypto-js')
@@ -26,11 +27,13 @@ router.post('/signup', [
             return res.status(400).json({ error: "Sorry a user with this email already exists!" })
         }
 
+        const hashedPassword = CryptoJS.AES.encrypt(req.body.password, process.env.AES_SEC).toString()
+
         user = await User.create({
             name: req.body.name,
             phoneNo: req.body.phoneNo,
             email: req.body.email,
-            password: CryptoJS.AES.encrypt(req.body.password, process.env.AES_SEC).toString()
+            password: hashedPassword
         })
 
         const data = {
@@ -41,7 +44,7 @@ router.post('/signup', [
 
         const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: 60 * 60 * 24 * 30 });
 
-        return res.status(200).json({ "Success": true, AuthToken: authToken, User: user });
+        return res.status(200).json({ "Success": true, 'AuthToken': authToken });
 
     } catch (err) {
         return res.status(500).send("Internal Server error")
@@ -62,8 +65,8 @@ router.post('/login', [
     try {
 
         let user = await User.findOne({ email: req.body.email });
-        if (user) {
-            return res.status(400).json({ error: "Sorry a user with this email already exists!" })
+        if (!user) {
+            return res.status(400).json({ error: "Sorry a user with this email dosnt exists!" })
         }
 
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.AES_SEC);

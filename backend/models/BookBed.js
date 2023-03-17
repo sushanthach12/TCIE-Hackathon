@@ -23,4 +23,4 @@ const BookBedSchema = new Schema({
         timestamps: true
     }
 )
-export default mongoose.models?.BookBed || mongoose.model("BookBed", BookBedSchema)
+module.exports = mongoose.model('BookBeds', BookBedSchema)

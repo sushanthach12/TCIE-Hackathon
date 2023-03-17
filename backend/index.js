@@ -10,6 +10,9 @@ connectDB()
 
 app.use(express.json()) // if you want use req body , you have to use thsi
 
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/bed', require('./routes/bed'))
+
 app.listen(port, () => {
     console.log(`Backend is listening at ${port}`)
 })
