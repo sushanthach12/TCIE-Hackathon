@@ -1,43 +1,41 @@
 const asyncHandler = require('express-async-handler')
 const Hospitals = require('../models/Hospitals')
 const { generateToken } = require('../utils/generateToken')
-const registerHospital = asyncHandler (async (req, res) => {
+const jwt = require('jsonwebtoken')
+
+const JWT_SECRET = process.env.JWT_SECRET
+
+const registerHospital = asyncHandler(async (req, res) => {
     try {
-        const {  name, facilities, email, password, address } = req.body
-    console.log(name)
-    console.log(facilities)
-    console.log(email)
-    console.log(password)
-    console.log(address)
-    const hospitalExist = await Hospitals.findOne({ email })
-    if(hospitalExist) {
-        res.status(400)
-        throw new Error('Hospital already exists')
-    }
-    const hospital = await Hospitals.create({
-        name,
-        facilities,
-        email,
-        password,
-        address
-    })
-    if(hospital) {
-        res.status(201).json({
-            _id: hospital._id,
-            name: hospital.name,
-            email: hospital.email,
-            address: hospital.address,
-            facilities: hospital.facilities,
-            token:generateToken(hospital._id),
+        const { name, email, address, pincode } = req.body
+
+        const hospitalExist = await Hospitals.findOne({ 'email': email })
+
+        if (hospitalExist) {
+            return res.status(400).json({ "Err": ' Hospital already exists' })
+        }
+        const hospital = await Hospitals.create({
+            name: name,
+            email: email,
+            address: address,
+            pincode: pincode
         })
-    } else {
-        res.status(400)
-        throw new Error('Invalid user data')
-    }
+
+        const data = {
+            hospital: {
+                id: hospital.id
+            }
+        }
+
+        const token = jwt.sign(data, JWT_SECRET, {expiresIn: '30d'})
+
+        return res.status(200).json({ "Hospital": hospital, 'token': token})
+
     } catch (error) {
-        console.log(error)
+        return res.status(500).json({ "Err": "Internal Server Error" })
     }
-    
+
 
 })
+
 module.exports = registerHospital

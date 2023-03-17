@@ -4,7 +4,9 @@ const registerHospital = require('../controllers/hospitalController');
 
 // @route   POST api/hospital
 // @desc    Register a hospital
-router.route('/api/hospital').post(registerHospital)
+router.post('/registerHos', async (req, res) => {
+    registerHospital(req, res)
+})
 
 // const addOrderItems = asyncHandler(async (req, res) => {
 //   const {
@@ -46,3 +48,4 @@ router.route('/api/hospital').post(registerHospital)
 // })
 
 
+module.exports = router
