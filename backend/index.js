@@ -12,6 +12,7 @@ app.use(express.json()) // if you want use req body , you have to use thsi
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/bed', require('./routes/bed'))
 app.use('/api/hospital', require('./routes/hospital'))
+app.use('/api/bookbed', require('./routes/bookbed'))
 
 app.listen(port, () => {
     console.log(`Backend is listening at ${port}`)

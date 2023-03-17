@@ -4,11 +4,9 @@ const router = express.Router();
 const authorize = require('../middleware/authorize')
 
 
-router.post('/getbeds', async (req, res) => {
+router.post('/addbeds', async (req, res) => {
     try {
-
-        let beds = await Bed.find();
-
+        
         return res.status(200).json({'Beds' : beds})
         
     } catch (error) {
