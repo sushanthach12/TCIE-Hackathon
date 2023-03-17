@@ -2,10 +2,12 @@ const asyncHandler = require('express-async-handler')
 const Hospitals = require('../models/Hospitals')
 const { generateToken } = require('../utils/generateToken')
 const registerHospital = asyncHandler (async (req, res) => {
-    const {  name, facilities, email, password, address } = req.body
+    try {
+        const {  name, facilities, email, password, address } = req.body
     console.log(name)
     console.log(facilities)
     console.log(email)
+    console.log(password)
     console.log(address)
     const hospitalExist = await Hospitals.findOne({ email })
     if(hospitalExist) {
@@ -32,6 +34,10 @@ const registerHospital = asyncHandler (async (req, res) => {
         res.status(400)
         throw new Error('Invalid user data')
     }
+    } catch (error) {
+        console.log(error)
+    }
+    
 
 })
 module.exports = registerHospital
