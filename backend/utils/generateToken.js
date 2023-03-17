@@ -7,8 +7,5 @@ const generateToken = async(id) => {
   })
 }
 
-<<<<<<< HEAD
 module.exports = generateToken
-=======
-module.exports= generateToken
->>>>>>> 378af08cca06490070165a0074d3dfdba2f02c02
+

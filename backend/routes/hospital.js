@@ -7,48 +7,5 @@ router.post('/registerHos', async (req, res) => {
     registerHospital(req, res)
 })
 
-<<<<<<< HEAD
-// const addOrderItems = asyncHandler(async (req, res) => {
-//   const {
-//     orderItems,
-//     shippingAddress,
-//     paymentMethod,
-//     itemsPrice,
-//     taxPrice,
-//     shippingPrice,
-//     totalPrice,
-//   } = req.body
-// console.log(orderItems)
-// console.log(shippingAddress)
-// console.log(paymentMethod)
 
-// console.log(shippingAddress)
-//   if (orderItems && orderItems.length === 0) {
-//     res.status(400)
-//     throw new Error('No order items')
-//     return
-//   } else {
-//     const order = new Order({
-//       orderItems,
-//       user: req.user._id,
-//       shippingAddress,
-//       paymentMethod,
-//       itemsPrice,
-//       taxPrice,
-//       shippingPrice,
-//       totalPrice,
-//     })
-
-//     const createdOrder = await order.save()
-
-//     res.status(201).json(createdOrder)
-//     adminEmailer()
-//     orderEmailer(req.user,orderItems[0].name,orderItems[0].price)
-//   }
-// })
-
-
-module.exports = router
-=======
 module.exports = router;
->>>>>>> 378af08cca06490070165a0074d3dfdba2f02c02
