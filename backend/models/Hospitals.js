@@ -1,30 +1,14 @@
 const mongoose = require("mongoose");
+const Facilities = require("./Facilities");
 
-const hospitalFacilities = mongoose.Schema(
-    {
-        name: { type: String, required: true },
-        hospital: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Hospital',
-        },
-    },
-    {
-        timestamps: true,
-    }
-)
+
 const HospitalSchema = new mongoose.Schema(
     {
-        hospitalId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            unique: true
-        },
         name: {
             type: String,
             required: true,
         },
-        facilities: [hospitalFacilities],
+        facilities: [Facilities],
         email: {
             type: String,
             required: true,
