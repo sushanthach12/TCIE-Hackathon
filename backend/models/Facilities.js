@@ -7,7 +7,7 @@ const Facilities = mongoose.Schema(
             required: true,
             ref: 'Hospital',
         },
-        name: { type: String, required: true },
+        name: { type: Object, required: true },
     },
     {
         timestamps: true,

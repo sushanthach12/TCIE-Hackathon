@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const registerHospital = require('../controllers/hospitalController');
+const { registerHospital, getHospitals } = require('../controllers/hospitalController');
 const getHospital = require('../controllers/hospitalController');
-// @route   POST api/hospital
-// @desc    Register a hospital
-router.post('/registerHos', async (req, res) => {
+const authorize = require('../middleware/authorize')
+
+router.post('/registerHos', authorize, async (req, res) => {
     registerHospital(req, res)
 })
-router.get('/getHos', async (req, res) => {
-    getHospital(req, res)
+router.post('/getHos', async (req, res) => {
+    getHospitals(req, res)
 })
 
 
