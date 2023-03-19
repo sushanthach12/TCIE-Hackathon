@@ -6,26 +6,25 @@ const BookBed = require('../models/BookBed')
 
 router.post('/bookbed', authorize, async (req, res) => {
     try {
-        const { hospitalID, bedID } = req.body;
         const userID = req.user.id
+        const { hospitalID, bedID } = req.body;
 
         const checkbed = await Bed.findOne({ "bedId": bedID, "hospitalID": hospitalID })
 
         if (!checkbed) {
             return res.status(400).json({ "err": "Bed not found" })
         }
-        else if (checkbed.occupied) {
-            return res.status(400).json({ "err": "Bed already occupied" })
-        } else {
-            const bookbed = await BookBed.create({
-                hospitalID: hospitalID,
-                bedID: bedID,
-                userID: userID
-            })
-            // checkbed.occupied = true;
-            // await checkbed.save();
-            return res.status(200).json({ "Success": true, "BookBed": bookbed })
-        }
+
+        const bookbed = await BookBed.create({
+            hospitalId: hospitalID,
+            bedId: bedID,
+            userId: userID
+        })
+        checkbed.occupied = true
+        checkbed.save();
+        
+        return res.status(200).json({ "Success": true, "BookBed": bookbed })
+
     } catch (error) {
         return res.status(500).json({ err: "Internal Server Error" })
     }
