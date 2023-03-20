@@ -17,8 +17,8 @@ const Navbar = () => {
                     <Link to={"/bookbeds"} className="mr-5 hover:text-gray-200">Book Beds</Link>
                 </nav>
                 <div class="flex justify-center gap-2">
-                    <button class="inline-flex text-white bg-blue-700 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button>
-                    <button class="inline-flex text-black bg-white border-0 py-1 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signup</button>
+                    <Link to={"/login"}><button class="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button></Link>
+                    <Link to={"/signup"}><button class="inline-flex text-black bg-white border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signup</button></Link>
                 </div>
             </div>
         </header>
