@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaUser } from 'react-icons/fa'
 
-const Navbar = () => {
+const Navbar = ({user}) => {
     return (
         <header className="text-white body-font bg-blue-500 px-8">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row justify-center items-center">
@@ -16,10 +17,11 @@ const Navbar = () => {
                     <Link to={"/hospitals"} className="mr-5 hover:text-gray-200">Hospitals</Link>
                     <Link to={"/bookbeds"} className="mr-5 hover:text-gray-200">Book Beds</Link>
                 </nav>
-                <div class="flex justify-center gap-2">
-                    <Link to={"/login"}><button class="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button></Link>
-                    <Link to={"/signup"}><button class="inline-flex text-black bg-white border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signup</button></Link>
-                </div>
+                {!localStorage.getItem('token') && <div className="flex justify-center gap-2">
+                    <Link to={"/login"}><button className="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button></Link>
+                    <Link to={"/signup"}><button className="inline-flex text-black bg-white border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signup</button></Link>
+                </div>}
+                {localStorage.getItem('token') && <span><FaUser/></span>}
             </div>
         </header>
     )

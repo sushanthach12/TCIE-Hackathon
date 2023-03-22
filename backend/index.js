@@ -1,12 +1,14 @@
 const express = require('express');
 const connectDB = require('./database/config')
 require('dotenv').config()
+const cors = require('cors')
+
+connectDB()
 
 const app = express()
 const port = process.env.PORT || 5000;
-// const port = 5000;
-connectDB()
 
+app.use(cors())
 app.use(express.json()) // if you want use req body , you have to use thsi
 
 app.use('/api/auth', require('./routes/auth'))

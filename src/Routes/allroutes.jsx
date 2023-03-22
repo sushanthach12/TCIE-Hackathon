@@ -6,20 +6,24 @@ import Login from '../Pages/Login'
 import Signup from '../Pages/Signup'
 import Hospitals from '../Pages/Hospitals'
 import Dashboard from '../Pages/Dashboard'
+import AuthState from '../Context/Auth/AuthState'
 
-const AllRoutes = () => {
+const AllRoutes = ({ setKey }) => {
   return (
-    <Routes>
-            <Route exact path='/' element={<Home/>}></Route>
-            <Route exact path='/dashboard/:id' element={<Dashboard/>}></Route>
-            <Route exact path='/hospitals' element={<Hospitals/>}></Route>
-            <Route exact path='/bookbeds' element={<BookBeds/>}></Route>
+    <AuthState>
+      <Routes>
+        <Route exact path='/' element={<Home />}></Route>
+        <Route exact path='/dashboard/:id' element={<Dashboard />}></Route>
+        <Route exact path='/hospitals' element={<Hospitals />}></Route>
+        <Route exact path='/bookbeds' element={<BookBeds />}></Route>
 
-            <Route exact path='/login' element={<Login/>}></Route>
-            <Route exact path='/signup' element={<Signup/>}></Route>
+        <Route exact path='/login' element={<Login setKey={setKey}/>}></Route>
+        <Route exact path='/signup' element={<Signup />}></Route>
 
-            <Route exact path='/bookbed/hospital/:id' element={<Signup/>}></Route>
-    </Routes>
+        <Route exact path='/bookbed/hospital/:id' element={<Signup />}></Route>
+
+      </Routes>
+    </AuthState>
   )
 }
 
