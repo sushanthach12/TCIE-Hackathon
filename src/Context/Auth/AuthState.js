@@ -17,8 +17,21 @@ const AuthState = (props) => {
 		return response
 	}
 
+	const getUser = async (token) => {
+		const res = await fetch(`${process.env.REACT_APP_HOST}/api/auth/getUser`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'authToken' : `${token}`
+			}
+		})
+
+		const response = await res.json()
+		return response
+	}
+
 	return (
-		<AuthContext.Provider value={{handleLogin}}>
+		<AuthContext.Provider value={{handleLogin, getUser}}>
 			{props.children}
 		</AuthContext.Provider>
 	)

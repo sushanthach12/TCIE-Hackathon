@@ -25,8 +25,7 @@ const Login = ({ setKey }) => {
         if (response.Success) {
             setCredentials({ email: "", password: "" })
             localStorage.setItem('token', response.AuthToken)
-            setKey(Math.random)
-
+            
             toast.success('Logged-In Successfully!', {
                 position: "bottom-left",
                 autoClose: 1000,
@@ -36,7 +35,8 @@ const Login = ({ setKey }) => {
                 draggable: true,
                 progress: undefined,
             });
-
+            
+            setKey(Math.random)
             setTimeout(() => {
                 navigate(`/dashboard/${response.AuthToken}`)
             }, 1000);
@@ -70,6 +70,7 @@ const Login = ({ setKey }) => {
                 <div>
                     {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/> */}
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
+                    <p className='text-sm mt-2 text-center font-semibold'>Or Signup to continue</p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" value="true" />

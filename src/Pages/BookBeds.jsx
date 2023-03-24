@@ -79,7 +79,7 @@ const BookBeds = () => {
 
 				<div className='grid grid-cols-3 gap-x-8 gap-y-4 px-4'>
 					<div class="flex border-2 rounded-md py-4 px-6">
-						<Link to={"bookbed/hospital/id"}>
+						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex-grow'>
 								<h2 class="title-font font-medium text-lg text-gray-900">Hospital Title</h2>
 								<h3 class="text-gray-500 mb-3">Location/Address</h3>
@@ -104,7 +104,7 @@ const BookBeds = () => {
 						</Link>
 					</div>
 					<div class="flex border-2 rounded-md py-4 px-6">
-						<Link to={"bookbed/hospital/id"}>
+						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex-grow'>
 								<h2 class="title-font font-medium text-lg text-gray-900">Hospital Title</h2>
 								<h3 class="text-gray-500 mb-3">Location/Address</h3>
@@ -129,7 +129,7 @@ const BookBeds = () => {
 						</Link>
 					</div>
 					<div class="flex border-2 rounded-md py-4 px-6">
-						<Link to={"bookbed/hospital/id"}>
+						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex-grow'>
 								<h2 class="title-font font-medium text-lg text-gray-900">Hospital Title</h2>
 								<h3 class="text-gray-500 mb-3">Location/Address</h3>
@@ -154,7 +154,7 @@ const BookBeds = () => {
 						</Link>
 					</div>
 					<div class="flex border-2 rounded-md py-4 px-6">
-						<Link to={"bookbed/hospital/id"}>
+						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex-grow'>
 								<h2 class="title-font font-medium text-lg text-gray-900">Hospital Title</h2>
 								<h3 class="text-gray-500 mb-3">Location/Address</h3>

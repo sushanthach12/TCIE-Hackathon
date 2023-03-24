@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
+import AuthState from './Context/Auth/AuthState';
+import HospitalState from './Context/Hospital/HospitalState';
 import AllRoutes from './Routes/AllRoutes';
 
 function App() {
@@ -14,15 +16,19 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    setUser({...user, token: token})
+    setUser({ ...user, token: token })
   }, [])
 
   return (
     <>
-      {key && <Navbar user={user} />}
-      <div className="mainBox mx-4 px-4 py-8 min-h-screen pb-20">
-        <AllRoutes setKey={setKey} />
-      </div>
+      <AuthState>
+        <HospitalState>
+        {key && <Navbar user={user} setKey={setKey} key={key}/>}
+        <div className="mainBox mx-4 px-4 py-8 min-h-screen pb-20">
+          <AllRoutes setKey={setKey} />
+        </div>
+        </HospitalState>
+      </AuthState>
     </>
   );
 }

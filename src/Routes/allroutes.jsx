@@ -6,11 +6,10 @@ import Login from '../Pages/Login'
 import Signup from '../Pages/Signup'
 import Hospitals from '../Pages/Hospitals'
 import Dashboard from '../Pages/Dashboard'
-import AuthState from '../Context/Auth/AuthState'
+import BookingForm from '../Pages/BookingForm'
 
 const AllRoutes = ({ setKey }) => {
   return (
-    <AuthState>
       <Routes>
         <Route exact path='/' element={<Home />}></Route>
         <Route exact path='/dashboard/:id' element={<Dashboard />}></Route>
@@ -20,10 +19,9 @@ const AllRoutes = ({ setKey }) => {
         <Route exact path='/login' element={<Login setKey={setKey}/>}></Route>
         <Route exact path='/signup' element={<Signup />}></Route>
 
-        <Route exact path='/bookbed/hospital/:id' element={<Signup />}></Route>
+        <Route exact path='/bookbed/hospital/:id' element={<BookingForm />}></Route>
 
       </Routes>
-    </AuthState>
   )
 }
 

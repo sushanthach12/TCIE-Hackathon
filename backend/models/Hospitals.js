@@ -6,16 +6,22 @@ const HospitalSchema = new mongoose.Schema({
         required: true,
     },
     email: {
+        type: String
+    },
+    state : {
         type: String,
-        required: true,
-        unique: true,
+        required: true
+    },
+    city : {
+        type: String,
+        required: true
     },
     address: {
         type: String,
         required: true,
     },
     pincode: {
-        type: String,
+        type: Number,
         required: true
     }
 },

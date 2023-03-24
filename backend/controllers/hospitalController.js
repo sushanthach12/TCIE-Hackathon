@@ -12,7 +12,7 @@ const registerHospital = asyncHandler(async (req, res) => {
         const user = await User.findById(userID).select('-password')
 
         if (user.isAdmin) {
-            const { name, email, address, pincode } = req.body
+            const { name, email, state, city, address, pincode } = req.body
             const hospitalExist = await Hospitals.findOne({ 'email': email })
             if (hospitalExist) {
                 return res.status(400).json({ "Err": ' Hospital already exists' })
@@ -20,6 +20,8 @@ const registerHospital = asyncHandler(async (req, res) => {
             const hospital = await Hospitals.create({
                 name: name,
                 email: email,
+                state: state,
+                city : city,
                 address: address,
                 pincode: pincode
             })
