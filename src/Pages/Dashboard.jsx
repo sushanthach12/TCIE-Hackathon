@@ -1,13 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { Link, useParams } from 'react-router-dom'
+import AuthContext from '../Context/Auth/AuthContext'
 
 const Dashboard = () => {
 
 	const { id } = useParams()
 
+	const authcontext = useContext(AuthContext)
+	const { getUser } = authcontext
+
+	const [User, setUser] = useState({})
+
 	useEffect(() => {
-		console.log(id);
+		(
+			async() => {
+				const token = localStorage.getItem('token')
+				const user = await getUser(token)
+				setUser(user)
+			}
+		)()
 	}, [])
 
 
@@ -21,7 +33,6 @@ const Dashboard = () => {
 				<div className='grid grid-cols-3 gap-x-8 gap-y-4 px-4'>
 
 					<div class="flex border-2 border-orange-500 rounded-md py-4 px-6">
-						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex flex-grow flex-row'>
 								<div className='m-2'>
 									<img src='/bed2.png' alt='bed logo' width={70} height={70} />
@@ -40,10 +51,8 @@ const Dashboard = () => {
                   <span className='flex justify-end'><HiOutlineArrowNarrowRight size={20} color={"blue"} className="hover:cursor-pointer" /></span>
                 </div> */}
 							</div>
-						</Link>
 					</div>
 					<div class="flex border-2 border-orange-500 rounded-md py-4 px-6">
-						<Link to={"/bookbed/hospital/id"}>
 							<div className='flex flex-grow flex-row'>
 								<div className='m-2'>
 									<img src='/healthcare.png' alt='bed logo' width={70} height={70} />
@@ -62,7 +71,6 @@ const Dashboard = () => {
                   <span className='flex justify-end'><HiOutlineArrowNarrowRight size={20} color={"blue"} className="hover:cursor-pointer" /></span>
                 </div> */}
 							</div>
-						</Link>
 					</div>
 					<div class="flex border-2 border-orange-500 rounded-md py-4 px-6">
 						<Link to={"/bookbed/hospital/id"}>
@@ -100,7 +108,7 @@ const Dashboard = () => {
 							<div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 								<dt class="text-sm font-medium text-gray-500">Full name</dt>
 								<dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-									<span class="flex-grow">Johnnny</span>
+									<span class="flex-grow">{User.name}</span>
 									<span class="ml-4 flex-shrink-0">
 										<button type="button" name="userName" class="bg-white rounded-md font-semibold text-purple-600 hover:text-purple-500 focus:outline-none ">Update</button>
 									</span>
@@ -110,7 +118,7 @@ const Dashboard = () => {
 							<div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 								<dt class="text-sm font-medium text-gray-500">Email address</dt>
 								<dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-									<span class="flex-grow">Johnnny@email.com</span>
+									<span class="flex-grow">{User.email}</span>
 									<span class="ml-4 flex-shrink-0">
 										<button type="button" name="userName" class="bg-white rounded-md font-semibold text-purple-600 hover:text-purple-500 focus:outline-none ">Update</button>
 									</span>
@@ -119,7 +127,7 @@ const Dashboard = () => {
 							<div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
 								<dt class="text-sm font-medium text-gray-500">Phone No</dt>
 								<dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-									<span class="flex-grow">+91 9878675678</span>
+									<span class="flex-grow">+91 {User.phoneNo}</span>
 									<span class="ml-4 flex-shrink-0">
 										<button type="button" name="userName" class="bg-white rounded-md font-semibold text-purple-600 hover:text-purple-500 focus:outline-none ">Update</button>
 									</span>

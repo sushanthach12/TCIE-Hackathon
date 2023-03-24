@@ -40,7 +40,7 @@ const Navbar = ({ user, setKey, key }) => {
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row justify-center items-center">
                 <Link className="flex title-font font-medium items-center mb-4 md:mb-0" to={"/"}>
                     <img src='/bed.png' alt='logo' className='w-8'/>
-                    <span className="ml-3 text-2xl font-bold">BMS</span>
+                    <span className="ml-3 text-2xl font-bold">HospoFriend</span>
                 </Link>
                 <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
                     {localStorage.getItem("token") ? <Link to={`/dashboard/${localStorage.getItem('token')}`} className="mr-5 hover:text-gray-200">Dashboard</Link> :

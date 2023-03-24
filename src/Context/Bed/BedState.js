@@ -8,7 +8,7 @@ const BedState = (props) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(hospitalID)
+            body: JSON.stringify({"hospitalID" : hospitalID}) 
         })
 
         const response = res.json()

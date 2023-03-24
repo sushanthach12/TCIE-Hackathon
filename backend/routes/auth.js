@@ -10,11 +10,7 @@ const authorize = require('../middleware/authorize')
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-router.post('/signup', [
-    body('name', 'Enter a valid name').isLength({ min: 3 }),
-    body('email', 'Enter a valid email').isEmail(),
-    body('password', 'password must be atleast of 8 characters').isLength({ min: 8 }),
-], async (req, res) => {
+router.post('/signup', async (req, res) => {
 
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

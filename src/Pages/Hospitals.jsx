@@ -81,7 +81,7 @@ const Hospitals = () => {
 						Object.entries(Hospitals).map((key, value) => {
 							return (
 								<div key={key} class="flex border-2 rounded-md py-4 px-6">
-									<Link to={"/bookbed/hospital/id"}>
+									<Link to={`/hospital/${Hospitals[value]._id}`}>
 										<div className='flex-grow'>
 											<h2 class="title-font font-medium text-lg text-gray-900">{Hospitals[value].name}</h2>
 											<h3 class="text-gray-500 mb-3">{Hospitals[value].city}, {Hospitals[value].state}</h3>

@@ -57,7 +57,7 @@ router.post('/getBeds', async (req, res) => {
 
         const beds = await Bed.find({"hospitalID" : hospitalID})
 
-        return res.status(200).json({ 'Success': true, 'Beds': beds })
+        return res.status(200).json({ 'Success': true, 'Beds': {...beds} })
 
     } catch (error) {
         return res.status(500).json({ err: "Internal Server Error" })

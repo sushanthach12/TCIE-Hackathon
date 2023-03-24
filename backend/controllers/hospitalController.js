@@ -62,6 +62,18 @@ const getHospital = asyncHandler(async (req, res) => {
     }
 })
 
+const getHospitalData = asyncHandler(async (req, res) => {
+    try {
+        const { hospitalID } = req.body
+
+        const hospital = await Hospitals.findById(hospitalID)
+
+        return res.status(200).json({ "Success": true, "Hospital": hospital })
+    } catch (error) {
+        return res.status(500).json({ "Err": "Internal Server Error" })
+    }
+})
+
 const getCities = asyncHandler(async (req, res) => {
     try {
         let cities = []
@@ -79,4 +91,4 @@ const getCities = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { registerHospital, getHospitals, getHospital, getCities }
+module.exports = { registerHospital, getHospitals, getHospital, getCities, getHospitalData }

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerHospital, getHospitals, getHospital, getCities } = require('../controllers/hospitalController');
+const { registerHospital, getHospitals, getHospital, getCities, getHospitalData } = require('../controllers/hospitalController');
 const authorize = require('../middleware/authorize');
 const Hospitals = require('../models/Hospitals');
 const d = require('../new.json')
@@ -13,6 +13,9 @@ router.post('/getHospitals', async (req, res) => {
 })
 router.post('/getHos', async (req, res) => {
     getHospital(req, res)
+})
+router.post('/getHospital', async (req, res) => {
+    getHospitalData(req, res)
 })
 
 router.post('/getCities', async (req, res) => {

@@ -27,6 +27,18 @@ const HospitalState = (props) => {
         return response
     }
 
+    const getHospitalData = async (hospitalID) => {
+        const res = await fetch(`${process.env.REACT_APP_HOST}/api/hospital/getHospital`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({"hospitalID" : hospitalID})
+        })
+        const response = await res.json()
+        return response
+    }
+
     const getCities = async () => {
         const res = await fetch(`${process.env.REACT_APP_HOST}/api/hospital/getCities`, {
             method: 'POST',
@@ -42,7 +54,7 @@ const HospitalState = (props) => {
 
 
     return (
-        <HospitalContext.Provider value={{getHospitals, getHospital, getCities}}>
+        <HospitalContext.Provider value={{getHospitals, getHospital, getCities, getHospitalData}}>
             {props.children}
         </HospitalContext.Provider>
     )
