@@ -45,10 +45,38 @@ const getHospitals = asyncHandler(async (req, res) => {
 
         const hospital = await Hospitals.find()
 
+        return res.status(200).json({ "Success": true, "Hospital": {...hospital }})
+    } catch (error) {
+        return res.status(500).json({ "Err": "Internal Server Error" })
+    }
+})
+
+const getHospital = asyncHandler(async (req, res) => {
+    try {
+
+        const hospital = await Hospitals.find({city: req.body.district})
+
         return res.status(200).json({ "Success": true, "Hospital": hospital })
     } catch (error) {
         return res.status(500).json({ "Err": "Internal Server Error" })
     }
 })
 
-module.exports = { registerHospital, getHospitals }
+const getCities = asyncHandler(async (req, res) => {
+    try {
+        let cities = []
+
+        const hospital = await Hospitals.find()
+
+        for(let i in hospital){
+            if(!cities.includes(hospital[i].city))
+                cities.push(hospital[i].city)
+        }
+
+        return res.status(200).json({ "Success": true, "Cities": cities })
+    } catch (error) {
+        return res.status(500).json({ "Err": "Internal Server Error" })
+    }
+})
+
+module.exports = { registerHospital, getHospitals, getHospital, getCities }
