@@ -9,7 +9,7 @@ router.post('/addFacility', async (req, res) => {
         const { hospitalID, name } = req.body
 
         const facility = await Facilities.create({
-            hospitalID: hospitalID,
+            hospital: hospitalID,
             name: name
         })
 
