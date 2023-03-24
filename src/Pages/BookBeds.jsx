@@ -22,6 +22,7 @@ const BookBeds = () => {
 
 	const handleChangeDis = (e) => {
 		setDisSel(e.target.value)
+		handleSubmit()
 	}
 	const handleChangeHos = (e) => {
 		setHosSel(e.target.value)
@@ -31,12 +32,12 @@ const BookBeds = () => {
 	const handleSubmit = async () => {
 		setisLoading(true)
 		const res = await getHospital(disSel)
-		const res2 = await getBedsHos(res.Hospital[0]._id)
+		// const res2 = await getBedsHos(res.Hospital[0]._id)
 		if (res.Success) {
 			setHospitals(res.Hospital)
 			setisLoading(false)
 			console.log(Hospitals);
-			console.log(res2)
+			// console.log(res2)
 		} else {
 			setError(true)
 		}
@@ -86,18 +87,24 @@ const BookBeds = () => {
 
 
 					</div>
-					{/* <div class="relative inline-block text-center">
+					<div class="relative inline-block text-center">
 					<div class="sm:col-span-3">
 							<div class="">
-								<select id="ward" name="ward" autocomplete="ward" class="bg-white pl-4 block w-full rounded-md border py-2 px-4 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6 font-semibold" onChange={handleChangeHos}>
+								<select id="hospital" name="hospital" autocomplete="ward" class="bg-white pl-4 block w-full rounded-md border py-2 px-4 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6 font-semibold" onChange={handleChangeHos}>
 									<option className='px-4 font-semibold' selected>--- Select Hospital ---</option>
-									<option className='px-4 font-semibold' value={"uni"} onClick={handleChangeHos}>United States</option>
-									<option className='px-4 font-semibold' value={"can"} onClick={handleChangeHos}>Canada</option>
-									<option className='px-4 font-semibold' value={"me"} onClick={handleChangeHos}>Mexico</option>
+									{
+										Object.entries(Hospitals).map((key, value) => {
+											return (
+												<option key={key} className='px-4 font-semibold' value={Hospitals[value].name} onClick={handleChangeHos}>{Hospitals[value].name}</option>
+											)
+										})
+									}
+
+									
 								</select>
 							</div>
 						</div>
-					</div> */}
+					</div>
 
 				</div>
 				<div className='relative inline-block text-center mt-4'>
