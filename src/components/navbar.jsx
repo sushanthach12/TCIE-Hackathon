@@ -47,10 +47,11 @@ const Navbar = ({ user, setKey, key }) => {
                         <Link to={"/login"} className="mr-5 hover:text-gray-200">Dashboard</Link>}
                     <Link to={"/hospitals"} className="mr-5 hover:text-gray-200">Hospitals</Link>
                     <Link to={"/bookbeds"} className="mr-5 hover:text-gray-200">Book Beds</Link>
+                    <Link to={"/reviews"} className="mr-5 hover:text-gray-200">Reviews</Link>
                 </nav>
                 {!localStorage.getItem('token') && <div className="flex justify-center gap-2">
-                    <Link to={"/login"}><button className="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button></Link>
-                    <Link to={"/signup"}><button className="inline-flex text-black bg-white border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signup</button></Link>
+                    {/* <Link to={"/login"}><button className="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold">Login</button></Link> */}
+                    <Link to={"/signup"}><button className="inline-flex text-black bg-white border-0 py-2 px-4 focus:outline-none hover:bg-gray-300 rounded text-sm font-semibold">Signin</button></Link>
                 </div>}
                 {localStorage.getItem('token') && <div className='flex flex-row justify-start items-center gap-x-2 hover:cursor-pointer' onClick={handleDropUser}>
                     <span><FaUser size={14} /></span>

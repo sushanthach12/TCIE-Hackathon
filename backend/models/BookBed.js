@@ -5,18 +5,19 @@ const { Schema } = mongoose
 const BookBedSchema = new Schema({
     hospitalId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Hospital',
+        required: true
     },
     bedId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Bed',
+        type: String,
+        required: true
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User',
+        required: true
+    },
+    Aadhaar: {
+        type: String,
+        required: true
     }
 },
     {

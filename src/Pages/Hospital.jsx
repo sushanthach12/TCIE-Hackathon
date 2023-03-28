@@ -7,13 +7,14 @@ const Hospital = () => {
     const { id } = useParams();
 
     const hospitalcontext = useContext(HospitalContext)
-    const { getHospitalData } = hospitalcontext
+    const { getHospitalData, getFacility } = hospitalcontext
 
     const bedcontext = useContext(BedContext)
     const { getBedsHos } = bedcontext
 
     const [Hospital, setHospital] = useState({})
     const [Bed, setBed] = useState({})
+    const [Facilities, setFacilities] = useState([])
 
     useEffect(() => {
         (
@@ -24,8 +25,16 @@ const Hospital = () => {
                 setBed(res2.Beds)
             }
         )()
-    }, [])
+    },[])
+    useEffect(() => {
+        (
+            async () => {
 
+                const res3 = await getFacility(id)
+                setFacilities(res3.Facility[0].name)
+            }
+        )()
+    },[])
 
 
     return (
@@ -146,7 +155,13 @@ const Hospital = () => {
                             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt class="text-sm font-medium text-gray-500">Medical Facilities</dt>
                                 <dd class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    
+                                    {
+                                        Facilities.map((i) => {
+                                            return (
+                                                `${i}, `
+                                            )
+                                        })
+                                    }
                                 </dd>
                             </div>
                             {/* <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -157,10 +172,10 @@ const Hospital = () => {
                         </dl>
                     </div>
                 </div>
-
+                
             </section>
             <div class="flex justify-end mt-7 leading-relaxed w-full">
-                <Link to={"/bookbed/hospital/id"}> <button class="inline-flex mr-16 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded-md text-lg shadow-gray-400 shadow-lg">Book Bed Now</button></Link>
+                <Link to={`/bookbed/hospital/${id}`}> <button class="inline-flex mr-16 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded-md text-lg shadow-gray-400 shadow-lg">Book Bed Now</button></Link>
             </div>
 
         </div>

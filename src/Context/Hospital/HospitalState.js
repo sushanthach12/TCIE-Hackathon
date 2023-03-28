@@ -51,10 +51,23 @@ const HospitalState = (props) => {
         return response
     }
 
+    const getFacility = async(hospitalID) => {
+        const res = await fetch(`${process.env.REACT_APP_HOST}/api/facility/getFacility`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({"hospitalID": hospitalID})
+        })
+
+        const response = await res.json()
+        return response
+    }
+
 
 
     return (
-        <HospitalContext.Provider value={{getHospitals, getHospital, getCities, getHospitalData}}>
+        <HospitalContext.Provider value={{getHospitals, getHospital, getCities, getHospitalData, getFacility}}>
             {props.children}
         </HospitalContext.Provider>
     )

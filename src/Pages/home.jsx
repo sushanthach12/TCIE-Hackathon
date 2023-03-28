@@ -13,9 +13,9 @@ const Home = () => {
                         <h1 class="title-font sm:text-5xl text-3xl mb-4 font-bold tracking-wider text-blue-900">Protecting and Taking Care to
                             <br class="hidden lg:inline-block" />Of your Health
                         </h1>
-                        <div class="flex justify-end mt-7 leading-relaxed w-full">
+                        {/* <div class="flex justify-end mt-7 leading-relaxed w-full">
                             <button class="inline-flex mr-16 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded-md text-lg shadow-gray-400 shadow-lg">Book Bed Now</button>
-                        </div>
+                        </div> */}
                     </div>
                     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
                         <img class="object-cover object-center rounded bg-white" alt="hero" src="/h2.png" />

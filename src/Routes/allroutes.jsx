@@ -8,6 +8,7 @@ import Hospitals from '../Pages/Hospitals'
 import Dashboard from '../Pages/Dashboard'
 import BookingForm from '../Pages/BookingForm'
 import Hospital from '../Pages/Hospital'
+import Review from '../Pages/Review'
 
 const AllRoutes = ({ setKey }) => {
   return (
@@ -19,6 +20,8 @@ const AllRoutes = ({ setKey }) => {
 
         <Route exact path='/login' element={<Login setKey={setKey}/>}></Route>
         <Route exact path='/signup' element={<Signup setKey={setKey}/>}></Route>
+
+        <Route exact path='/reviews' element={<Review/>}></Route>
 
         <Route exact path='/bookbed/hospital/:id' element={<BookingForm />}></Route>
         <Route exact path='/hospital/:id' element={<Hospital />}></Route>

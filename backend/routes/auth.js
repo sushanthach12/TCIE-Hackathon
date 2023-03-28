@@ -20,16 +20,54 @@ router.post('/signup', async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "Sorry a user with this email already exists!" })
+            return res.status(200).json({ "Success": true, 'User': user })
         }
 
         const hashedPassword = CryptoJS.AES.encrypt(req.body.password, process.env.AES_SEC).toString()
 
         user = await User.create({
             name: req.body.name,
-            phoneNo: req.body.phoneNo,
             email: req.body.email,
             password: hashedPassword
+        })
+
+        const data = {
+            user: {
+                id: user.id
+            }
+        }
+
+        const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: 60 * 60 * 24 * 30 });
+
+        return res.status(200).json({ "Success": true, 'AuthToken': authToken });
+
+    } catch (err) {
+        return res.status(500).send("Internal Server error")
+    }
+})
+router.post('/signin', async (req, res) => {
+
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ err: errors.array() })
+    }
+
+    try {
+        let user = await User.findOne({ email: req.body.email });
+        if (user) {
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            const authToken = jwt.sign(data, JWT_SECRET, { expiresIn: 60 * 60 * 24 * 30 });
+            return res.status(200).json({ "Success": true, 'User': user, 'AuthToken': authToken})
+        }
+
+        user = await User.create({
+            name: req.body.name,
+            email: req.body.email
         })
 
         const data = {
@@ -91,7 +129,7 @@ router.post('/getUser', authorize, async (req, res) => {
 
     try {
         const userID = req.user.id;
-        const user = await User.findById(userID).select('-password');
+        const user = await User.findById(userID);
         return res.send(user)
     } catch (error) {
         return res.status(500).send("Internal Server error")

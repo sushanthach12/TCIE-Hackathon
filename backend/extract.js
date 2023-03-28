@@ -26,4 +26,3 @@ const res = fs.readFile("./csvjson.json", function(err, data) {
     })
 });
 
-console.log(D)

@@ -3,12 +3,11 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import BedContext from '../Context/Bed/BedContext'
 import HospitalContext from '../Context/Hospital/HospitalContext'
-import Hospital from './Hospital'
 
 const BookBeds = () => {
 
 	const hospitalcontext = useContext(HospitalContext)
-	const { getHospital, getCities } = hospitalcontext
+	const { getHospital, getCities, getHospitalData } = hospitalcontext
 
 	const bedcontext = useContext(BedContext)
 	const { getBedsHos } = bedcontext
@@ -20,27 +19,32 @@ const BookBeds = () => {
 	const [isLoading, setisLoading] = useState(false)
 	const [Error, setError] = useState(false)
 	const [Hospitals, setHospitals] = useState({})
+	const [Hospital, setHospital] = useState({})
 	const [hosID, setHosID] = useState("")
 
-	const handleChangeDis = (e) => {
+	const handleChangeDis = async(e) => {
 		setDisSel(e.target.value)
-		handleSubmit()
-	}
-	const handleChangeHos = (e) => {
-		setHosSel(e.target.value)
-		
-	}
-
-	const handleSubmit = async () => {
-		setisLoading(true)
 		const res = await getHospital(disSel)
 		// const res2 = await getBedsHos(res.Hospital[0]._id)
 		if (res.Success) {
 			setHospitals(res.Hospital)
+			setHosID(res.Hospital[0]._id)
 			setisLoading(false)
+			
 		} else {
 			setError(true)
 		}
+	}
+	const handleChangeHos = (e) => {
+		setHosSel(e.target.value)
+
+	}
+
+	const handleSubmit = async () => {
+		setisLoading(true)
+		const res2 = await getHospitalData(hosID)
+		setHospital(res2.Hospital)
+		setisLoading(false)
 	}
 
 	useEffect(() => {
@@ -107,9 +111,9 @@ const BookBeds = () => {
 					</div>
 
 				</div>
-				{/* <div className='relative inline-block text-center mt-4'>
+				<div className='relative inline-block text-center mt-4'>
 					<button type='button' className="inline-flex text-white bg-blue-700 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm font-semibold" onClick={handleSubmit}>Submit</button>
-				</div> */}
+				</div>
 			</div>
 
 			<div className='border-2 rounded-md mt-4 mx-6 py-6 pb-8 flex flex-col justify-center items-center'>
@@ -233,6 +237,9 @@ const BookBeds = () => {
 								</div>
 
 							</section>
+							<div class="flex justify-end mt-7 leading-relaxed w-full">
+								<Link to={"/bookbed/hospital/id"}><button class="inline-flex mr-16 text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-orange-600 rounded-md text-lg shadow-gray-400 shadow-lg">Book Bed Now</button></Link>
+							</div>
 						</div>
 					}
 				</div>

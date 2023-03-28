@@ -24,7 +24,22 @@ const AuthState = (props) => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({name: credentials.name, email: credentials.email, phoneNo: credentials.phoneNo, password: credentials.password })
+			body: JSON.stringify({name: credentials.name, email: credentials.email})
+		})
+
+		const response = await res.json();
+		return response
+	}
+	const handleSignin = async (credentials) => {
+		const res = await fetch(`${process.env.REACT_APP_HOST}/api/auth/signin`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': 'Content-Type',
+				'Access-Control-Allow-Methods': 'POST'
+			},
+			body: JSON.stringify({name: credentials.name, email: credentials.email})
 		})
 
 		const response = await res.json();
@@ -45,7 +60,7 @@ const AuthState = (props) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{handleLogin, getUser, handleSignup}}>
+		<AuthContext.Provider value={{handleLogin, getUser, handleSignup, handleSignin}}>
 			{props.children}
 		</AuthContext.Provider>
 	)

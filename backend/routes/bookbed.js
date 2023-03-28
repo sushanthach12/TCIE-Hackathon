@@ -7,9 +7,9 @@ const BookBed = require('../models/BookBed')
 router.post('/bookbed', authorize, async (req, res) => {
     try {
         const userID = req.user.id
-        const { hospitalID, bedID } = req.body;
+        const { hospitalID, bedID, uid } = req.body;
 
-        const checkbed = await Bed.findOne({ "bedId": bedID, "hospitalID": hospitalID })
+        const checkbed = await Bed.findOne({ "hospitalID": hospitalID, "bedId": bedID })
 
         if (!checkbed) {
             return res.status(400).json({ "err": "Bed not found" })
@@ -18,7 +18,8 @@ router.post('/bookbed', authorize, async (req, res) => {
         const bookbed = await BookBed.create({
             hospitalId: hospitalID,
             bedId: bedID,
-            userId: userID
+            userId: userID,
+            Aadhaar: uid
         })
         checkbed.occupied = true
         checkbed.save();

@@ -3,34 +3,37 @@ import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import AuthContext from '../Context/Auth/AuthContext'
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 
-
-const Signup = ({setKey}) => {
+const Signup = ({ setKey }) => {
 
     const navigate = useNavigate()
 
     const authcontext = useContext(AuthContext)
-    const { handleSignup } = authcontext
+    const { handleSignin } = authcontext
 
     const [credentials, setCredentials] = useState({
-        name : "",
-        email: "",
-        phoneNo: "",
-        password: ""
+        name: "",
+        email: ""
     })
 
-    const handleChange = (e) => {
-        setCredentials({...credentials, [e.target.name] : e.target.value})
-    }
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        const response = await handleSignup(credentials)
+    const onSignupSuccess = async (credentialResponse) => {
+        const decoded = jwt_decode(credentialResponse.credential);
+        setCredentials({
+            name: decoded.name,
+            email: decoded.email
+        })
+        setTimeout(() => {
+
+        },2000)
+        const response = await handleSignin(credentials)
 
         if (response.Success) {
-            setCredentials({ name : "", email: "",phoneNo: "", password: "" })
+            setCredentials({ name: "", email: "" })
             localStorage.setItem('token', response.AuthToken)
-            
+
             toast.success('Logged-In Successfully!', {
                 position: "bottom-left",
                 autoClose: 1000,
@@ -40,12 +43,24 @@ const Signup = ({setKey}) => {
                 draggable: true,
                 progress: undefined,
             });
-            
+
             setKey(Math.random)
             setTimeout(() => {
                 navigate(`/dashboard/${response.AuthToken}`)
             }, 1000);
         }
+    }
+
+    const onErrorSignup = async () => {
+        toast.error('Something Went Wrong!', {
+            position: "bottom-left",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
     }
 
     return (
@@ -61,37 +76,35 @@ const Signup = ({setKey}) => {
                 draggable
                 pauseOnHover
             />
-            <div className="w-full max-w-md space-y-8">
+            < div className="w-full max-w-md space-y-8">
                 <div>
                     {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"/> */}
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Signup to continue</h2>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+
+                {/* <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" value="true" />
                     <div className="-space-y-px rounded-md shadow-sm">
                         <div>
                             <label for="username" className="sr-only">Name</label>
-                            <input id="username" name="name" type="text" required className="relative block w-full rounded-t-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Name" value={credentials.name} onChange={handleChange}/>
+                            <input id="username" name="name" type="text" required className="relative block w-full rounded-t-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Name" value={credentials.name} onChange={handleChange} />
                         </div>
                         <div>
                             <label for="email-address" className="sr-only">Email address</label>
-                            <input id="email-address" name="email" type="email" autocomplete="email" required className="relative block w-full  border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Email address" value={credentials.email} onChange={handleChange}/>
+                            <input id="email-address" name="email" type="email" autocomplete="email" required className="relative block w-full  border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Email address" value={credentials.email} onChange={handleChange} />
                         </div>
                         <div>
                             <label for="phone" className="sr-only">Email address</label>
-                            <input id="phone" name="phoneNo" type="text" autocomplete="phone" required className="relative block w-full  border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Phone Number" value={credentials.phoneNo} onChange={handleChange}/>
+                            <input id="phone" name="phoneNo" type="text" autocomplete="phone" required className="relative block w-full  border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Phone Number" value={credentials.phoneNo} onChange={handleChange} />
                         </div>
                         <div>
                             <label for="password" className="sr-only">Password</label>
-                            <input id="password" name="password" type="password" autocomplete="current-password" required className="relative block w-full rounded-b-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Password" value={credentials.password} onChange={handleChange}/>
+                            <input id="password" name="password" type="password" autocomplete="current-password" required className="relative block w-full rounded-b-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 sm:text-sm sm:leading-6" placeholder="Password" value={credentials.password} onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="flex items-center justify-center">
-                        {/* <div className="flex items-center">
-                            <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                            <label for="remember-me" className="ml-2 block text-sm text-gray-900">Remember me</label>
-                        </div> */}
+                       
 
                         <div className="text-sm">
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
@@ -107,8 +120,20 @@ const Signup = ({setKey}) => {
                             </span>
                             Signup
                         </button>
-                    </div>
-                </form>
+                    </div> 
+                </form> */}
+                <div className='w-full'>
+
+                    <GoogleLogin
+                        onSuccess={credentialResponse => {
+                            onSignupSuccess(credentialResponse)
+                        }}
+                        onError={() => {
+                            onErrorSignup()
+                        }}
+                        style={{ width: 70 }}
+                    />
+                </div>
             </div>
         </div>
     )
